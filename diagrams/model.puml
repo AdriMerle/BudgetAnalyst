@@ -1,0 +1,13 @@
+@startuml model
+
+Class Transaction {
+    date : Date 
+    nom : String
+    montant : Float 
+}
+
+Class Categorie {
+    nom : String
+}
+
+Transaction "0..*" -- "1..*" Categorie

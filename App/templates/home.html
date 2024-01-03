@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}BudgetAnalyst{% endblock %}
+{% block content %}
+<body>
+    <h1>Bienvenue sur BudgetAnalyst</h1>
+    <br><br>
+    <div class="row col-12 mb-3">
+        <div class="col-10 offset-1">
+            <canvas id="EvolutionChartCanva"></canvas>
+        </div>
+    </div>
+    <div class="row col-12">
+        <div class="col-5 offset-1">
+            <canvas id="EntrantChartCanva"></canvas>
+        </div>
+        <div class="col-5">
+            <canvas id="SortantChartCanva"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const CanvaEntrant = document.getElementById('EntrantChartCanva').getContext('2d');
+        const EntrantChart = new Chart(CanvaEntrant, {
+            type: "pie",
+            data: {
+                labels : [{% for item in entrant_par_categorie %}"{{ item.nom }}",{% endfor %}],
+                datasets: [{
+                    label: "Montant",
+                    data : [{% for item in entrant_par_categorie %}{{ item.total }},{% endfor %}],
+                    backgroundColor: [{% for item in entrant_par_categorie %}'{{item.couleur}}',{% endfor %}],
+                    borderWidth: 2,
+                    hoverOffset: 7
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Répartition des revenus par catégorie"
+                    },
+                    legend: {
+                        position: "bottom"
+                    }
+                }        
+            }
+        });
+        const CanvaSortant = document.getElementById('SortantChartCanva').getContext('2d');
+        const SortantChart = new Chart(CanvaSortant, {
+            type: "pie",
+            data: {
+                labels : [{% for item in sortant_par_categorie %}"{{ item.nom }}",{% endfor %}],
+                datasets: [{
+                    label: "Montant",
+                    data : [{% for item in sortant_par_categorie %}{{ item.total }},{% endfor %}],
+                    backgroundColor: [{% for item in sortant_par_categorie %}'{{item.couleur}}',{% endfor %}],
+                    borderWidth: 2,
+                    hoverOffset: 7
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Répartition des dépenses par catégorie"
+                    },
+                    legend: {
+                        position: "bottom"
+                    }
+                }        
+            }
+        });
+        const CanvaEvolution = document.getElementById('EvolutionChartCanva').getContext('2d');
+        const EvolutionChart = new Chart(CanvaEvolution, {
+            type: "line",
+            data: {
+                labels : [{% for item in evolution.keys %}"{{ item }}",{% endfor %}],
+                datasets: [{
+                    label: "Montant",
+                    data : [{% for item in evolution.values %}{{ item }},{% endfor %}],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.15
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Evolution du solde au cours du temps"
+                    },
+                    legend: {
+                        display: false,
+                    }
+                }        
+            }
+        });
+    </script>
+</body>
+{% endblock %}
