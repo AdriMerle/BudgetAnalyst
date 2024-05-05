@@ -1,5 +1,28 @@
 # BudgetAnalyst
-A simple budget analyst in Python, written as a side project to learn Django.
+English version [below](#en-budgetanalyst)
+
+Une application web analyste de budget, en Python, développée dans le cadre d'un projet personnel pour apprendre Django.
+
+## Fonctionnalités
+- Graphiques des dépenses et recettes, triés par catégorie
+- Graphiques d'évolution du solde
+- Gestion de catégories avec des couleurs
+- Tableaux modifiables pour gérer les transactions et les catégories
+- Import des données bancaires simplifié (testé avec des données BoursoBank)
+
+## Installation
+Vous devez d'abord cloner le repo, ensuite lancer la commande suivante dans un terminal :   
+```pip install -r requirements.txt```
+
+## Utilisation
+Double cliquer sur ce fichier :   
+```./runserver```
+
+Cela va démarrer le serveur et ouvrir votre navigateur internet préféré sur l'application.
+
+
+# [EN] BudgetAnalyst
+A simple budget analyst web-app in Python, written as a side project to learn Django.
 
 ## Features
 - Graphs indicating your expenses and incomes broken down by category
